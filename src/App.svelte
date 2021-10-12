@@ -1,5 +1,6 @@
 <script>
     import AutoComplete from 'simple-svelte-autocomplete'
+    import AsyncExample from './AsyncExample.svelte'
 
     let selectedItem
     let items = [
@@ -9,25 +10,17 @@
     ]
 
     function setValueAndOptions(){
-        console.log('button clicked')
         items = [
             {label: 'nandu'},
             {label: 'lynx'},
             {label: 'tapir'}
         ]
         selectedItem = items[0]
-        console.log(items)
-        console.log(selectedItem)
     }
 
-    function handleBeforeChange(){
-        console.log('before change')
-    }
-    function handleOnChange(){
-        console.log('on change')
-    }
-    function handleOnFocus(){
-        console.log('on focus')
+    function searchFunction(keyword){
+        console.log(items.filter(item => item.label.indexOf(keyword)))
+        return keyword? items.filter(item => item.label.indexOf(keyword)) : items
     }
 
 </script>
@@ -47,10 +40,14 @@
         </li>
         <li>Click into the autocomplete field.Autocomplete options open, but you see the old options.</li>
     </ol>
-    <AutoComplete debug labelFieldName="label" bind:selectedItem={selectedItem}  items={items} beforeChange={handleBeforeChange()} onChange={handleOnChange()} onFocus={handleOnFocus()}/>
+    <AutoComplete debug labelFieldName="label" bind:selectedItem={selectedItem} {searchFunction}/>
     <p>Autocomplete options are: <br>
         {#each items as item}{item.label} {/each}</p>
     <p>For a reset please reload the page.</p>
     <h3> Second unexpected behavior:</h3>
     <p>Event handler seem not to be called. Checked with beforeChange, onChange and onFocus. They are called once when the autocomplete is created, but then never again.</p>
+</section>
+
+<section>
+    <AsyncExample/>
 </section>
