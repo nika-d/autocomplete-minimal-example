@@ -1,5 +1,6 @@
 <script>
     import AutoComplete from 'simple-svelte-autocomplete'
+    import {tick} from 'svelte'
 
     let selectedItem
     let items = [
@@ -8,13 +9,18 @@
         {label: 'triangle'}
     ]
 
+    async function select(item){
+        await tick()
+        selectedItem = item
+    }
+
     function setValueAndOptions(){
         items = [
             {label: 'nandu'},
             {label: 'lynx'},
             {label: 'tapir'}
         ]
-        selectedItem = items[0]
+        select(items[0])
     }
 
 </script>
