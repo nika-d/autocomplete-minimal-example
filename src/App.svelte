@@ -47,7 +47,7 @@
         </li>
         <li>Click into the autocomplete field.Autocomplete options open, but you see the old options.</li>
     </ol>
-    <AutoComplete labelFieldName="label" bind:selectedItem={selectedItem}  items={items} beforeChange={handleBeforeChange()} onChange={handleOnChange()} onFocus={handleOnFocus()}/>
+    <AutoComplete debug labelFieldName="label" bind:selectedItem={selectedItem}  items={items} beforeChange={handleBeforeChange()} onChange={handleOnChange()} onFocus={handleOnFocus()}/>
     <p>Autocomplete options are: <br>
         {#each items as item}{item.label} {/each}</p>
     <p>For a reset please reload the page.</p>
